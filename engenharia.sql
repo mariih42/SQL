@@ -12,7 +12,7 @@ create table Funcionario
 (
 	idFunc		int not null primary key identity,
 	nome		varchar(50) not null,
-	cpf			varchar(14) not null unique,
+	cpf		varchar(14) not null unique,
 	dataNasc	varchar(10) not null,
 	status		int null check(status in(1,2))
 )
@@ -23,10 +23,10 @@ go
 create table Dependentes
 (
 	idDependente	int not null primary key identity,
-	nome			varchar(50) not null,
-	idade			int not null,
-	parentesco		varchar(200) not null,
-	IdFunc			int not null,
+	nome		varchar(50) not null,
+	idade		int not null,
+	parentesco	varchar(200) not null,
+	IdFunc		int not null,
 	foreign key (IdFunc) references Funcionario(idFunc)
 )
 go
@@ -59,12 +59,12 @@ go
 
 create table Engenheiro
 (
-	idFunc			int not null primary key,
+	idFunc		int not null primary key,
 	especialidade	varchar(500),
-	anosExp			int not null,
+	anosExp		int not null,
 	-- 1 - junior | 2 - master | 3- sênior
 	classificacao	int not null check(classificacao in(1,2,3)),
-	idDepto			int not null references Departamentos(idDepto),
+	idDepto		int not null references Departamentos(idDepto),
 	foreign key(idFunc) references Funcionario(idFunc)
 )
 go
@@ -88,12 +88,12 @@ go
 create table EngenheiroProjeto
 (
 	idEngenheiro int not null,
-	idFunc			int not null,
-    idProjeto		int not null,
-	qtdHoras		int	null,
+	idFunc	int not null,
+    	idProjeto	int not null,
+	qtdHoras int	null,
 	primary key (idEngenheiro, idProjeto),
-    foreign key (idEngenheiro) references Engenheiro(idFunc),
-    foreign key (idProjeto) references Projeto(idProjeto)
+    	foreign key (idEngenheiro) references Engenheiro(idFunc),
+    	foreign key (idProjeto) references Projeto(idProjeto)
 )
 go
 
@@ -141,14 +141,14 @@ go
 
 create procedure sp_CadEngenheiro
 (
-	@nome			varchar(50),
-	@cpf			varchar(14),
-	@dataNasc		varchar(10),
-	@anosExp		int,
+	@nome		varchar(50),
+	@cpf		varchar(14),
+	@dataNasc	varchar(10),
+	@anosExp	int,
 	@especialidade	varchar(50),
 	@classificacao	int,
-	@IdDepto		int,
-	@status			int
+	@IdDepto	int,
+	@status		int
 )
 as 
 begin
